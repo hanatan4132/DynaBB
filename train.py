@@ -28,23 +28,16 @@ class RewardPredict:
         self.model.eval()
         
         
-def calculate_learning_rate(episode, start_lr=0.0001, min_lr=0.00001, decay_period=300):
-    """隨著訓練進度逐漸調整學習率
-    
-    Args:
-        episode: 當前訓練回合
-        start_lr: 初始學習率
-        min_lr: 最小學習率
-        decay_period: 衰減期（經過多少回合完全衰減到最小學習率）
-        
-    Returns:
-        float: 當前應使用的學習率
-    """
-    # 線性衰減因子
+
+def calculate_learning_rate(episode, start_lr=0.0001, min_lr=0.00001, decay_period=200):
     decay_factor = max(0, 1 - episode / decay_period)
-    # 計算當前學習率
     current_lr = max(min_lr, start_lr * decay_factor + min_lr)
     return current_lr
+
+def calculate_planning_steps(episode, start_steps=15, min_steps=5, decay_period=200):
+    decay_factor = max(0, 1 - episode / decay_period)
+    return max(min_steps, int(start_steps * decay_factor) + min_steps)
+
 
 
 class DDQNAgent:
@@ -190,7 +183,7 @@ for episode in range(total_episodes):
         agent.train(use_virtual=False)
         virtual_lr = calculate_learning_rate(episode)
         
-        if step % 10 == 0:
+        if step % 15 == 0:
             with torch.no_grad():
                 action_tensor = torch.tensor([action], device=dyna.device)
                 pred_st1p, pred_st2p = dyna.model(prev_frame_2, prev_frame_1, action_tensor)
