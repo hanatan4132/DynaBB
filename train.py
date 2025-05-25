@@ -174,6 +174,7 @@ for episode in range(total_episodes):
         agent.store_experience([prev_frame_2, prev_frame_1], action, reward, [next_tensor_1, next_tensor_2], done, use_virtual=False)
         agent.train(use_virtual=False)
 
+
         if step % 15 == 0:
             with torch.no_grad():
                 action_tensor = torch.tensor([action], device=dyna.device)
