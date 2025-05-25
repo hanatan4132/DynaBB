@@ -29,14 +29,6 @@ class RewardPredict:
         
         
 
-def calculate_learning_rate(episode, start_lr=0.0001, min_lr=0.00001, decay_period=200):
-    decay_factor = max(0, 1 - episode / decay_period)
-    current_lr = max(min_lr, start_lr * decay_factor + min_lr)
-    return current_lr
-
-def calculate_planning_steps(episode, start_steps=15, min_steps=5, decay_period=200):
-    decay_factor = max(0, 1 - episode / decay_period)
-    return max(min_steps, int(start_steps * decay_factor) + min_steps)
 
 
 
@@ -181,9 +173,8 @@ for episode in range(total_episodes):
 
         agent.store_experience([prev_frame_2, prev_frame_1], action, reward, [next_tensor_1, next_tensor_2], done, use_virtual=False)
         agent.train(use_virtual=False)
-        virtual_lr = calculate_learning_rate(episode)
-        
-        if step % calculate_planning_steps(episode) == 0:
+
+        if step % 15 == 0:
             with torch.no_grad():
                 action_tensor = torch.tensor([action], device=dyna.device)
                 pred_st1p, pred_st2p = dyna.model(prev_frame_2, prev_frame_1, action_tensor)
