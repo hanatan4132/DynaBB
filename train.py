@@ -183,7 +183,7 @@ for episode in range(total_episodes):
         agent.train(use_virtual=False)
         virtual_lr = calculate_learning_rate(episode)
         
-        if step % 15 == 0:
+        if step % calculate_planning_steps(episode) == 0:
             with torch.no_grad():
                 action_tensor = torch.tensor([action], device=dyna.device)
                 pred_st1p, pred_st2p = dyna.model(prev_frame_2, prev_frame_1, action_tensor)
