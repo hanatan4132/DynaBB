@@ -3,17 +3,21 @@ from variables import *
 
 class level1:
     def __init__(self):
-        self.width = (screen_width // cols) - 4
+        self.width = (screen_width // (cols)) -4
         self.height = 15
         self.blocks = []
 
     def create_wall(self):
         self.blocks = []
         pattern = [
-            [1, 2, 0, 2, 1],
-            [0, 1, 3, 1, 0],
-            [0, 0, 1, 0, 0],
-            [0, 0, 0, 0, 0],
+            [1, 2, 3, 3, 3, 3, 2, 1],
+            [1, 1, 2, 3, 3, 2, 1, 1],
+            [0, 1, 2, 3, 3, 2, 1, 0],
+            [0, 0, 1, 2, 2, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
         ]
         for row_idx, row in enumerate(pattern):
             block_row = []
