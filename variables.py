@@ -33,8 +33,8 @@ score_text_color = (255, 255, 0)  # 分數文字顏色（黃色）
 outline_color = (0, 0, 0)  # 文字邊框顏色（黑色）
 
 # define game variables
-cols = 8  # 磚塊列數減少
-rows = 8  # 磚塊行數減少
+cols = 6  # 磚塊列數減少
+rows = 6  # 磚塊行數減少
 clock = pygame.time.Clock()
 fps = 30  # 遊戲幀率
 live_ball = False

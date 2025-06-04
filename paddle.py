@@ -4,7 +4,7 @@ from variables import screen_width, screen_height, cols, paddle_col, paddle_outl
 class paddle:
     def __init__(self, height=10, width=None, speed=5, radius=5, border=2):
         self.height = height
-        self.width = screen_width // (cols-2) if width is None else width
+        self.width = screen_width // (cols-1) if width is None else width
         self.speed = speed
         self.radius = radius
         self.border = border
