@@ -1,0 +1,5 @@
+*.pth
+*.pt
+*.ckpt
+reward_models/*.pth
+*.npz
